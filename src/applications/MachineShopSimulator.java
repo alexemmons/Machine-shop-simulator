@@ -8,21 +8,27 @@ import exceptions.MyInputException;
 
 public class MachineShopSimulator {
     
+    /** entry point for machine shop simulator */
+    public static void main(String[] args) {
+        largeTime = Integer.MAX_VALUE;
+        /*
+         * It's vital that we (re)set this to 0 because if the simulator is called
+         * multiple times (as happens in the acceptance tests), because timeNow
+         * is static it ends up carrying over from the last time it was run. I'm
+         * not convinced this is the best place for this to happen, though.
+         */
+        timeNow = 0;
+        inputData(); // get machine and job data
+        startShop(); // initial machine loading
+        simulate(); // run all jobs through shop
+        outputStatistics(); // output machine wait times
+    }
     
     public static final String NUMBER_OF_MACHINES_AND_JOBS_MUST_BE_AT_LEAST_1 = "number of machines and jobs must be >= 1";
     public static final String CHANGE_OVER_TIME_MUST_BE_AT_LEAST_0 = "change-over time must be >= 0";
     public static final String EACH_JOB_MUST_HAVE_AT_LEAST_1_TASK = "each job must have >= 1 task";
     public static final String BAD_MACHINE_NUMBER_OR_TASK_TIME = "bad machine number or task time";
     
-    // top-level nested classes
-    
-
-
-
-    
-
-
-
     // data members of MachineShopSimulator
     private static int timeNow; // current time
     private static int numMachines; // number of machines
@@ -175,19 +181,4 @@ public class MachineShopSimulator {
         }
     }
 
-    /** entry point for machine shop simulator */
-    public static void main(String[] args) {
-        largeTime = Integer.MAX_VALUE;
-        /*
-         * It's vital that we (re)set this to 0 because if the simulator is called
-         * multiple times (as happens in the acceptance tests), because timeNow
-         * is static it ends up carrying over from the last time it was run. I'm
-         * not convinced this is the best place for this to happen, though.
-         */
-        timeNow = 0;
-        inputData(); // get machine and job data
-        startShop(); // initial machine loading
-        simulate(); // run all jobs through shop
-        outputStatistics(); // output machine wait times
-    }
 }
