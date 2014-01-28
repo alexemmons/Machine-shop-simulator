@@ -1,6 +1,6 @@
 package applications;
 
-import applications.MachineShopSimulator.Job;
+import applications.Job;
 import dataStructures.LinkedQueue;
 
 public class Machine {
