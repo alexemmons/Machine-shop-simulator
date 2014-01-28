@@ -123,6 +123,10 @@ public class MachineShopSimulator {
         }
 
         // input the jobs
+        inputJobs(keyboard);
+    }
+
+    private static void inputJobs(MyInputStream keyboard) {
         Job theJob;
         for (int i = 1; i <= numJobs; i++) {
             System.out.println("Enter number of tasks for job " + i);
@@ -133,20 +137,26 @@ public class MachineShopSimulator {
 
             // create the job
             theJob = new Job(i);
-            System.out.println("Enter the tasks (machine, time)"
-                    + " in process order");
-            for (int j = 1; j <= tasks; j++) {// get tasks for job i
-                int theMachine = keyboard.readInteger();
-                int theTaskTime = keyboard.readInteger();
-                if (theMachine < 1 || theMachine > numMachines
-                        || theTaskTime < 1)
-                    throw new MyInputException(BAD_MACHINE_NUMBER_OR_TASK_TIME);
-                if (j == 1)
-                    firstMachine = theMachine; // job's first machine
-                theJob.addTask(theMachine, theTaskTime); // add to
-            } // task queue
+            firstMachine = createJob(keyboard, theJob, tasks, firstMachine); // task queue
             machine[firstMachine].jobQ.put(theJob);
         }
+    }
+
+    private static int createJob(MyInputStream keyboard, Job theJob, int tasks,
+            int firstMachine) {
+        System.out.println("Enter the tasks (machine, time)"
+                + " in process order");
+        for (int j = 1; j <= tasks; j++) {// get tasks for job i
+            int theMachine = keyboard.readInteger();
+            int theTaskTime = keyboard.readInteger();
+            if (theMachine < 1 || theMachine > numMachines
+                    || theTaskTime < 1)
+                throw new MyInputException(BAD_MACHINE_NUMBER_OR_TASK_TIME);
+            if (j == 1)
+                firstMachine = theMachine; // job's first machine
+            theJob.addTask(theMachine, theTaskTime); // add to
+        }
+        return firstMachine;
     }
 
     /** load first jobs onto each machine */
