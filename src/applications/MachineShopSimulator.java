@@ -74,7 +74,7 @@ public class MachineShopSimulator {
                                                     // state
             lastJob = null;
             // wait over, ready for new job
-            if (currentMachine.getJobQ().isEmpty()) // no waiting job
+            if (currentMachine.hasNoActiveJob()) // no waiting job
                 eList.setFinishTime(theMachine, largeTime);
             else {// take job off the queue and work on it
                 currentMachine.activeJob = (Job) currentMachine.getJobQ()
@@ -95,6 +95,9 @@ public class MachineShopSimulator {
 
         return lastJob;
     }
+
+
+    
 
     /** input machine shop data */
     static void inputData() {
