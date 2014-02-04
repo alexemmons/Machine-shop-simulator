@@ -1,7 +1,6 @@
 package applications;
 
 public class EventList {
-    public static final String NUMBER_OF_MACHINES_MUST_BE_AT_LEAST_1 = "number of machines must be >= 1";
     // data members
     int[] finishTime; // finish time array
 
@@ -12,7 +11,7 @@ public class EventList {
                                                              // m
                                                              // machines
         if (theNumMachines < 1)
-            throw new IllegalArgumentException(NUMBER_OF_MACHINES_MUST_BE_AT_LEAST_1);
+            throw new IllegalArgumentException(MachineShopSimulator.NUMBER_OF_MACHINES_MUST_BE_AT_LEAST_1);
         finishTime = new int[theNumMachines + 1];
 
         // all machines are idle, initialize with
