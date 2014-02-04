@@ -11,8 +11,8 @@ public class Job {
 
     // constructor
     public Job(int theId) {
-        setId(theId);
-        setTaskQ(new LinkedQueue());
+        this.id = theId;
+        taskQ = new LinkedQueue();
         // length and arrivalTime have default value 0
     }
 
@@ -24,20 +24,12 @@ public class Job {
     // remove next task of job and return its time also update length
     public int removeNextTask() {
         int theTime = ((Task) getTaskQ().remove()).getTime();
-        setLength(getLength() + theTime);
+        this.length = (getLength() + theTime);
         return theTime;
-    }
-
-    public void setTaskQ(LinkedQueue taskQ) {
-        this.taskQ = taskQ;
     }
 
     public LinkedQueue getTaskQ() {
         return taskQ;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
     }
 
     public int getLength() {
@@ -50,10 +42,6 @@ public class Job {
 
     public int getArrivalTime() {
         return arrivalTime;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getId() {

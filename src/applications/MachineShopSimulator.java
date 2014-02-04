@@ -118,8 +118,9 @@ public class MachineShopSimulator {
         System.out.println("Enter change-over times for machines");
         for (int j = 1; j <= numMachines; j++) {
             int ct = keyboard.readInteger();
-            if (ct < 0)
+            if (ct < 0) {
                 throw new MyInputException(CHANGE_OVER_TIME_MUST_BE_AT_LEAST_0);
+            }
             machine[j].setChangeTime(ct);
         }
 

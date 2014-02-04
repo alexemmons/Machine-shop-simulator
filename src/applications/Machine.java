@@ -16,6 +16,7 @@ public class Machine {
         jobQ = new LinkedQueue();
     }
 
+    // other methods
     public LinkedQueue getJobQ() {
         return jobQ;
     }
