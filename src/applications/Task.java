@@ -6,16 +6,16 @@ public class Task {
     private int time;
 
     // constructor
-    Task(int theMachine, int theTime) {
+    public Task(int theMachine, int theTime) {
         machine = theMachine;
         time = theTime;
     }
 
-    int getMachine() {
+    public int getMachine() {
         return machine;
     }
 
-    int getTime() {
+    public int getTime() {
         return time;
     }
 }
