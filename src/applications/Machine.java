@@ -54,15 +54,15 @@ public class Machine {
     }
     
     public boolean hasNoWaitingJob() {
-        return this.getJobQ().isEmpty();
+        return getJobQ().isEmpty();
     }
     
     public Object removeJobQ() {
-        return this.getJobQ().remove();
+        return getJobQ().remove();
     }
     
     public int getActiveArrivalTime() {
-        return this.getActiveJob().getArrivalTime();
+        return getActiveJob().getArrivalTime();
     }
     
     public int removeNextTaskFromActive() {
