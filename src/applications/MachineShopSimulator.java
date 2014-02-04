@@ -73,14 +73,14 @@ public class MachineShopSimulator {
             // state
             lastJob = null;
             // wait over, ready for new job
-            if (machine[theMachine].getJobQ().isEmpty()) // no waiting job
+            if (machine[theMachine].getJobQ().isEmpty()) {// no waiting job
                 eList.setFinishTime(theMachine, largeTime);
-            else {// take job off the queue and work on it
+            } else {// take job off the queue and work on it
                 machine[theMachine].setActiveJob((Job) machine[theMachine].getJobQ()
-                .remove());
+                        .remove());
                 machine[theMachine].setTotalWait(machine[theMachine].getTotalWait()
                         + (timeNow
-                        - machine[theMachine].getActiveJob().getArrivalTime()));
+                                - machine[theMachine].getActiveJob().getArrivalTime()));
                 machine[theMachine]
                         .setNumTasks(machine[theMachine].getNumTasks() + 1);
                 int t = machine[theMachine].getActiveJob().removeNextTask();
@@ -105,14 +105,16 @@ public class MachineShopSimulator {
         System.out.println("Enter number of machines and jobs");
         numMachines = keyboard.readInteger();
         numJobs = keyboard.readInteger();
-        if (numMachines < 1 || numJobs < 1)
+        if (numMachines < 1 || numJobs < 1) {
             throw new MyInputException(NUMBER_OF_MACHINES_AND_JOBS_MUST_BE_AT_LEAST_1);
+        }
 
         // create event and machine queues
         eList = new EventList(numMachines, largeTime);
         machine = new Machine[numMachines + 1];
-        for (int i = 1; i <= numMachines; i++)
+        for (int i = 1; i <= numMachines; i++) {
             machine[i] = new Machine();
+        }
 
         // input the change-over times
         System.out.println("Enter change-over times for machines");
@@ -134,8 +136,9 @@ public class MachineShopSimulator {
             System.out.println("Enter number of tasks for job " + i);
             int tasks = keyboard.readInteger(); // number of tasks
             int firstMachine = 0; // machine for first task
-            if (tasks < 1)
+            if (tasks < 1) {
                 throw new MyInputException(EACH_JOB_MUST_HAVE_AT_LEAST_1_TASK);
+            }
 
             // create the job
             theJob = new Job(i);
@@ -144,18 +147,17 @@ public class MachineShopSimulator {
         }
     }
 
-    private static int createJob(MyInputStream keyboard, Job theJob, int tasks,
-            int firstMachine) {
-        System.out.println("Enter the tasks (machine, time)"
-                + " in process order");
+    private static int createJob(MyInputStream keyboard, Job theJob, int tasks, int firstMachine) {
+        System.out.println("Enter the tasks (machine, time)" + " in process order");
         for (int j = 1; j <= tasks; j++) {// get tasks for job i
             int theMachine = keyboard.readInteger();
             int theTaskTime = keyboard.readInteger();
-            if (theMachine < 1 || theMachine > numMachines
-                    || theTaskTime < 1)
+            if (theMachine < 1 || theMachine > numMachines || theTaskTime < 1) {
                 throw new MyInputException(BAD_MACHINE_NUMBER_OR_TASK_TIME);
-            if (j == 1)
+            }
+            if (j == 1) {
                 firstMachine = theMachine; // job's first machine
+            }
             theJob.addTask(theMachine, theTaskTime); // add to
         }
         return firstMachine;
@@ -176,8 +178,9 @@ public class MachineShopSimulator {
             Job theJob = changeState(nextToFinish);
             // move theJob to its next machine
             // decrement numJobs if theJob has finished
-            if (theJob != null && !moveToNextMachine(theJob))
+            if (theJob != null && !moveToNextMachine(theJob)) {
                 numJobs--;
+            }
         }
     }
 
