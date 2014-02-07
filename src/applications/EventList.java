@@ -15,7 +15,7 @@ public class EventList {
         // all machines are idle, initialize with
         // large finish time
         for (int i = 1; i <= theNumMachines; i++) {
-            getFinishTime()[i] = theLargeTime;
+            finishTime[i] = theLargeTime;
         }
     }
 
@@ -24,25 +24,21 @@ public class EventList {
         // find first machine to finish, this is the
         // machine with smallest finish time
         int p = 1;
-        int t = getFinishTime()[1];
-        for (int i = 2; i < getFinishTime().length; i++) {
-            if (getFinishTime()[i] < t) {// i finishes earlier
+        int t = finishTime[1];
+        for (int i = 2; i < finishTime.length; i++) {
+            if (finishTime[i] < t) {// i finishes earlier
                 p = i;
-                t = getFinishTime()[i];
+                t = finishTime[i];
             }
         }
         return p;
     }
 
     public int nextEventTime(int theMachine) {
-        return getFinishTime()[theMachine];
+        return finishTime[theMachine];
     }
 
     public void setFinishTime(int theMachine, int theTime) {
         finishTime[theMachine] = theTime;
-    }
-
-    public int[] getFinishTime() {
-        return finishTime;
     }
 }
